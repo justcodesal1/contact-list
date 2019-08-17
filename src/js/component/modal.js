@@ -1,46 +1,89 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-class ModalExample extends React.Component {
-	constructor(props) {
-		super(props);
+import { Context } from "../store/appContext";
+
+class Modal extends React.Component {
+	constructor() {
+		super();
 		this.state = {
-			modal: false
+			// Initialize your state
 		};
-
-		this.toggle = this.toggle.bind(this);
-	}
-
-	toggle() {
-		this.setState(prevState => ({
-			modal: !prevState.modal
-		}));
 	}
 
 	render() {
 		return (
-			<div>
-				<Button color="danger" onClick={this.toggle}>
-					{this.props.buttonLabel}
-				</Button>
-				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-					<ModalHeader toggle={this.toggle}>Delete Contact</ModalHeader>
-					<ModalBody>ARE YOU SURE YOU WANT TO DELETE THIS CONTACT???</ModalBody>
-					<ModalFooter>
-						<Button color="success" onClick={this.toggle}>
-							No, its ok lets keep it
-						</Button>{" "}
-						<Button color="danger" onClick={() => actions.deleteContact(elementId)}>
-							Yes, lets delete this thing
-						</Button>
-					</ModalFooter>
-				</Modal>
-			</div>
+			<Context.Consumer>
+				{({ store, actions }) => {
+					return (
+						<div
+							className="modal"
+							tabIndex="-1"
+							role="dialog"
+							style={{ display: this.props.show ? "inline-block" : "none" }}>
+							<div className="modal-dialog" role="document">
+								<div className="modal-content">
+									<div className="modal-header">
+										<h5 className="modal-title">Are you sure?</h5>
+										{this.props.onClose ? (
+											<button
+												onClick={() => this.props.onClose()}
+												type="button"
+												className="close"
+												data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										) : (
+											""
+										)}
+									</div>
+									<div className="modal-body">
+										<p>Warning: unknown consequences after this point... Kidding!</p>
+									</div>
+									<div className="modal-footer">
+										<button
+											onClick={() => this.props.onClose()}
+											type="button"
+											className="btn btn-primary">
+											Oh no!
+										</button>
+										<button
+											onClick={() => actions.deleteContact(this.props.contact.id)}
+											type="button"
+											className="btn btn-secondary"
+											data-dismiss="modal">
+											Do it!
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					);
+				}}
+			</Context.Consumer>
 		);
 	}
 }
-ModalExample.propTypes = {
-	className: PropTypes.string,
-	buttonLabel: PropTypes.string
+/**
+ * Define the data-types for
+ * your component's properties
+ **/
+Modal.propTypes = {
+	history: PropTypes.object,
+	onClose: PropTypes.func,
+	show: PropTypes.bool,
+	contact: PropTypes.object,
+	onDelete: PropTypes.func,
+	position: PropTypes.number
 };
-export default ModalExample;
+
+/**
+ * Define the default values for
+ * your component's properties
+ **/
+Modal.defaultProps = {
+	show: false,
+	onClose: null
+};
+export default withRouter(Modal);
