@@ -25,7 +25,7 @@ const getState = ({ getStore, setStore }) => {
 						.then(data => {
 							//console.log(data);
 							let store = this.state.store;
-							this.setState({ store: { ...store, contacts: data } });
+							setStore({ contacts: data });
 						})
 						.catch(error => {
 							//console.log(error);
@@ -45,7 +45,7 @@ const getState = ({ getStore, setStore }) => {
 					.then(data => {
 						//console.log(data);
 						let store = this.state.store;
-						this.setState({ store: { ...store, contacts: data } });
+						setStore({ contacts: data });
 					})
 					.catch(error => {
 						//console.log(error);
@@ -69,7 +69,7 @@ const getState = ({ getStore, setStore }) => {
 					.then(data => {
 						//console.log(data);
 						let store = this.state.store;
-						this.setState({ store: { ...store, contacts: data } });
+						setStore({ contacts: data });
 					})
 					.catch(error => {
 						//console.log(error);
