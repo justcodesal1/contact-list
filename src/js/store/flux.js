@@ -26,6 +26,7 @@ const getState = ({ getStore, setStore }) => {
 							//console.log(data);
 							let store = this.state.store;
 							setStore({ contacts: data });
+							history.props("/contacts");
 						})
 						.catch(error => {
 							//console.log(error);
@@ -46,12 +47,13 @@ const getState = ({ getStore, setStore }) => {
 						//console.log(data);
 						let store = this.state.store;
 						setStore({ contacts: data });
+						history.props("/contacts");
 					})
 					.catch(error => {
 						//console.log(error);
 					});
 			},
-			editContact: (name, email, address, phone, elementId) => {
+			editContact: (name, email, address, phone, elementId, props) => {
 				//console.log("Edit" + name, email, address, phone, elementId);
 				fetch("https://assets.breatheco.de/apis/fake/contact/" + elementId, {
 					method: "PUT",
@@ -70,6 +72,7 @@ const getState = ({ getStore, setStore }) => {
 						//console.log(data);
 						let store = this.state.store;
 						setStore({ contacts: data });
+						props.history("/contacts");
 					})
 					.catch(error => {
 						//console.log(error);

@@ -74,7 +74,9 @@ export default class EditView extends React.Component {
 												this.state.email,
 												this.state.address,
 												this.state.phone,
-												this.props.match.params.id
+
+												this.props.match.params.id,
+												this.props
 											)
 										}
 										type="button"

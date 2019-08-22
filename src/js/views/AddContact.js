@@ -64,7 +64,8 @@ export default class AddContact extends React.Component {
 												this.state.full_name,
 												this.state.email,
 												this.state.address,
-												this.state.phone
+												this.state.phone,
+												this.props.history
 											)
 										}
 										type="button"
