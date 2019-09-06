@@ -18,10 +18,9 @@ export default class EditView extends React.Component {
 		return (
 			<Context.Consumer>
 				{({ store, actions }) => {
-					const contact = store.contacts.find(c => c.id === this.props.match.params.id);
-					console.log("###", contact);
+					const contact = store.contacts.find(c => c.id === parseInt(this.props.match.params.id));
+					//console.log("im here");
 					if (typeof contact === "undefined") return "Loading...";
-					//console.log("This is the contact we found", contact);
 					return (
 						<div className="container">
 							<div>
@@ -67,22 +66,23 @@ export default class EditView extends React.Component {
 											placeholder="Enter address"
 										/>
 									</div>
-									<button
-										onClick={() =>
-											actions.editContact(
-												this.state.full_name,
-												this.state.email,
-												this.state.address,
-												this.state.phone,
-
-												this.props.match.params.id,
-												this.props
-											)
-										}
-										type="button"
-										className="btn btn-primary form-control">
-										Save Edited Contact
-									</button>
+									<Link to="/">
+										<button
+											onClick={() =>
+												actions.editContact(
+													this.state.full_name,
+													this.state.email,
+													this.state.address,
+													this.state.phone,
+													this.props.match.params.id,
+													this.props
+												)
+											}
+											type="button"
+											className="btn btn-primary form-control">
+											Save Edited Contact
+										</button>
+									</Link>
 									<Link className="mt-3 w-100 text-center" to="/">
 										Go Back to Contacts
 									</Link>

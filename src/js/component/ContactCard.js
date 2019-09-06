@@ -31,9 +31,13 @@ class ContactCard extends React.Component {
 										<Link to={"/edit/" + this.props.contact.id} className="btn btn-clear">
 											<i className="fas fa-pencil-alt mr-0" />
 										</Link>
-										<button className="btn" onClick={() => this.props.onDelete(this.props.contact)}>
-											<i className="fas fa-trash-alt" />
-										</button>
+										<Link to="/">
+											<button
+												className="btn"
+												onClick={() => this.props.onDelete(this.props.contact)}>
+												<i className="fas fa-trash-alt" />
+											</button>
+										</Link>
 									</div>
 									<label className="name lead">{this.props.contact.full_name}</label>
 									<br />

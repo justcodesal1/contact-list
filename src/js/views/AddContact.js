@@ -58,20 +58,22 @@ export default class AddContact extends React.Component {
 											placeholder="Enter address"
 										/>
 									</div>
-									<button
-										onClick={() =>
-											actions.saveContact(
-												this.state.full_name,
-												this.state.email,
-												this.state.address,
-												this.state.phone,
-												this.props.history
-											)
-										}
-										type="button"
-										className="btn btn-primary form-control">
-										Save Your New Contact
-									</button>
+									<Link to="/">
+										<button
+											onClick={() =>
+												actions.saveContact(
+													this.state.full_name,
+													this.state.email,
+													this.state.address,
+													this.state.phone,
+													this.props.history
+												)
+											}
+											type="button"
+											className="btn btn-primary form-control">
+											Save Your New Contact
+										</button>
+									</Link>
 									<Link className="mt-3 w-100 text-center" to="/">
 										Go Back to Contacts
 									</Link>
